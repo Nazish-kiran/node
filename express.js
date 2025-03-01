@@ -6,10 +6,10 @@ const app = express();
 
 app.use(express.static("public"));
 
-const homePagePath = path.join(import.meta.dirname, "public", "index.html");
+const notFoundPagePath = path.join(import.meta.dirname, "public", "404.html");
 
 app.get("/", (req, res) => {
-  res.sendFile(homePagePath);
+  res.send("<h1 style='font-family:cursive;'>Home page of express </h1>");
 });
 app.get("/about/:username", (req, res) => {
   console.log(req.params);
@@ -31,6 +31,11 @@ app.get("/contact", (req, res) => {
 app.get("/product", (req, res) => {
   res.send(`<h1 style='font-family:cursive;'> user searched for ${req.query.search}</h1>`);
 });
+app.use((req , res)=>{
+  res.status(404).sendFile(notFoundPagePath)
+})
+
+
 // const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log("server is running on port 4000");
