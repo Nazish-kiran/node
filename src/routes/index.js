@@ -2,10 +2,10 @@ import express from "express";
 import path from "path";
 
 const router = express.Router();
-const notFoundPagePath = path.join(import.meta.dirname, "public", "404.html");
+const notFoundPagePath = path.join(import.meta.dirname,'../..', "public", "404.html");
 
 router.get("/", (req, res) => {
-  res.send("<h1 style='font-family:cursive;'>Home page of express </h1>");
+  res.render("index", { percentage : '90%'});
 });
 router.get("/about/:username", (req, res) => {
   console.log(req.params);
